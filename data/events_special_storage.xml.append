@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FTL>
+<mod:findName type="event" name="STORAGE_CHECK_BUTTON">
+  <mod-append:choice hidden="true">
+	<text>Combo Weapons.</text>
+	<event load="COMBO_MAIN_MENU_LOAD"/>
+  </mod-append:choice>
+</mod:findName>
+</FTL>

@@ -1,96 +1,25 @@
 <FTL>
-<event name="AEA_COMBO_MAIN_MENU_LOAD">
-    <loadEvent>AEA_COMBO_MAIN_MENU</loadEvent>
+<event name="COMBO_MAIN_MENU_LOAD">
+    <loadEvent>COMBO_MAIN_MENU</loadEvent>
 </event>
 
-<event name="AEA_COMBO_MAIN_MENU">
+<event name="COMBO_MAIN_MENU">
     <text>Available Blueprints (Need atleast one component to be visible).</text>
     <choice hidden="true">
-        <text>Go back.</text>
+        <text>Nevermind.</text>
         <event load="STORAGE_CHECK"/>
     </choice>
-    <!--choice hidden="false" req="aea_craft_burst_focus_1_1_prev">
-        <text>Burst Pinpoint MK XI</text>
-        <event load="AEA_COMBO_BURST_FOCUS_1_1"/>
-    </choice-->
 </event>
 
-<event name="AEA_COMBO_CRAFT">
+<event name="COMBO_CRAFT">
     <text>Requires:</text>
     <choice hidden="false">
-        <text>Go Back.</text>
-        <event load="AEA_COMBO_MAIN_MENU_LOAD"/>
+        <text>Nevermind.</text>
+        <event load="COMBO_MAIN_MENU_LOAD"/>
     </choice>
 </event>
 
-<event name="AEA_COMBO_CRAFT_STEP">
+<event name="COMBO_CRAFT_STEP">
     <text>Choose Crafting Component.</text>
-</event>
-
-<event name="AEA_COMBO_BURST_FOCUS_1_1">
-    <text>AEA_COMBO_BURST_FOCUS_1_1</text>
-    <loadEvent>AEA_COMBO_BURST_FOCUS_1_1_SKIP</loadEvent>
-    <weapon name="AEA_COMBO_BURST_FOCUS_1_1"/>
-</event>
-
-<event name="AEA_COMBO_BURST_FOCUS_1_1_SKIP">
-    <text>Requires:
-    Atleast One:
-        Burst Laser MK I
-    Atleast One:
-        'Dirk' Pinpoint
-    </text>
-    <choice hidden="false">
-        <text>Blueprint:</text>
-        <event>
-            <text>BLUEPRINT</text>
-            <loadEvent>AEA_COMBO_BURST_FOCUS_1_1_SKIP</loadEvent>
-            <weapon name="AEA_COMBO_BURST_FOCUS_1_1"/>
-        </event>
-    </choice>
-    <choice hidden="true">
-        <text>Go Back</text>
-        <event load="AEA_COMBO_MAIN_MENU_LOAD"/>
-    </choice>
-    <choice hidden="false" req="aea_craft_burst_focus_1_1">
-        <text>Craft the weapon.</text>
-        <event load="AEA_COMBO_BURST_FOCUS_1_1_CRAFT_1"/>
-    </choice>
-</event>
-<event name="AEA_COMBO_BURST_FOCUS_1_1_CRAFT_1">
-    <text>Choosing Crafting Component 1</text>
-    <choice hidden="true">
-        <text>Go Back</text>
-        <event load="AEA_COMBO_MAIN_MENU_LOAD"/>
-    </choice>
-    <choice hidden="false">
-        <text>Use your Burst Laser MK I</text>
-        <event>
-            <text>You disassemble the weapon</text>
-            <remove name="LASER_BURST_2"/>
-            <choice hidden="true">
-                <text>Continue...</text>
-                <event load="AEA_COMBO_BURST_FOCUS_1_1_CRAFT_2"/>
-            </choice>
-        </event>
-    </choice>
-</event>
-<event name="AEA_COMBO_BURST_FOCUS_1_1_CRAFT_2">
-    <text>Choosing Crafting Component 2</text>
-    <choice hidden="false">
-        <text>Use your 'Dirk' Pinpoint</text>
-        <event>
-            <text>You disassemble the weapon</text>
-            <remove name="FOCUS_1"/>
-            <choice hidden="true">
-                <text>Continue...</text>
-                <event load="AEA_COMBO_BURST_FOCUS_1_1_CRAFT_3"/>
-            </choice>
-        </event>
-    </choice>
-</event>
-<event name="AEA_COMBO_BURST_FOCUS_1_1_CRAFT_3">
-    <text>You follow the blueprint and eventually come out with a unique new weapon.</text>
-    <weapon name="AEA_COMBO_BURST_FOCUS_1_1"/>
 </event>
 </FTL>

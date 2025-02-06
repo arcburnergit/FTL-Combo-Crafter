@@ -3,35 +3,58 @@ mods.combo = {}
 local vter = mods.multiverse.vter
 
 mods.combo.craftedWeapons = {}
-local craftedWeapons = mods.arc_combo.craftedWeapons
-craftedWeapons["COMBO_BURST_FOCUS_1_1"] = {component_amounts = {1, 1}, components = {{"LASER_BURST_2"}, {"FOCUS_1"}}}
+local craftedWeapons = mods.combo.craftedWeapons
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_1_1", component_amounts = {1, 1}, components = {{"LASER_BURST_2", "LASER_CHAINGUN", "LASER_CHARGEGUN"}, {"FOCUS_1"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_2_1", component_amounts = {1, 1}, components = {{"LASER_BURST_3", "LASER_CHARGEGUN_2"}, {"FOCUS_1"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_3_1", component_amounts = {1, 1}, components = {{"LASER_BURST_5", "LASER_CHAINGUN_2"}, {"FOCUS_1"}}} )
+
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_1_2", component_amounts = {1, 1}, components = {{"LASER_BURST_2", "LASER_CHAINGUN", "LASER_CHARGEGUN"}, {"FOCUS_2"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_2_2", component_amounts = {1, 1}, components = {{"LASER_BURST_3", "LASER_CHARGEGUN_2"}, {"FOCUS_2"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_3_2", component_amounts = {1, 1}, components = {{"LASER_BURST_5", "LASER_CHAINGUN_2"}, {"FOCUS_2"}}} )
+
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_1_3", component_amounts = {1, 1}, components = {{"LASER_BURST_2", "LASER_CHAINGUN", "LASER_CHARGEGUN"}, {"FOCUS_3", "FOCUS_CHAIN"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_2_3", component_amounts = {1, 1}, components = {{"LASER_BURST_3", "LASER_CHARGEGUN_2"}, {"FOCUS_3", "FOCUS_CHAIN"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_BURST_FOCUS_3_3", component_amounts = {1, 1}, components = {{"LASER_BURST_5", "LASER_CHAINGUN_2"}, {"FOCUS_3", "FOCUS_CHAIN"}}} )
+
+table.insert(craftedWeapons, {weapon = "COMBO_ION_FIRESTART_1", component_amounts = {1, 1}, components = {{"ION_2"}, {"LASER_FIRE"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_ION_FIRESTART_2", component_amounts = {1, 1}, components = {{"ION_3"}, {"LASER_FIRE"}}} )
+table.insert(craftedWeapons, {weapon = "COMBO_ION_FIRESTART_3", component_amounts = {1, 1}, components = {{"ION_4"}, {"LASER_FIRE"}}} )
 
 local craftedItemsVisible = {}
 local emptyReq = Hyperspace.ChoiceReq()
+local blueReq = Hyperspace.ChoiceReq()
+blueReq.object = "pilot"
+blueReq.blue = true
+blueReq.max_level = mods.multiverse.INT_MAX
+blueReq.max_group = -1
+
+function TEST(needed)
+	local neededBlueprint = Hyperspace.Blueprints:GetWeaponBlueprint(needed) or Hyperspace.Blueprints:GetDroneBlueprint(needed) or Hyperspace.Blueprints:GetAugmentBlueprint(needed)
+	print(neededBlueprint.desc.title:GetText())
+end
 
 local function addComponentStep(currentEvent, weapon, craftingData, itemLevel, itemAmount)
 	--print(weapon.." ITEM LEVEL AT: "..itemLevel.." NEEDS: "..#craftingData.components.." ITEM AMOUNT AT: "..itemAmount.." NEEDS: "..craftingData.component_amounts[itemLevel])
 	local eventManager = Hyperspace.Event
+	local player = Hyperspace.ships.player
 	currentEvent:RemoveChoice(0)
 	for _, needed in ipairs(craftingData.components[itemLevel]) do
-		local tempEvent = eventManager:CreateEvent("COMBO_CRAFT_STEP", 0, false)
-		tempEvent.stuff.removeItem = needed
-		local neededBlueprint = Hyperspace.Blueprints:GetWeaponBlueprint(needed)
-		currentEvent:AddChoice(tempEvent, "Use your "..neededBlueprint.desc.title:GetText(), emptyReq, false)
-		if itemAmount >= craftingData.component_amounts[itemLevel] then
-			if itemLevel >= #craftingData.components then
-				--[[tempEvent:RemoveChoice(0)
-				local rewardEvent = eventManager:CreateEvent("AEA_COMBO_CRAFT_STEP", 0, false)
-				rewardEvent.stuff.weapon = Hyperspace.Blueprints:GetWeaponBlueprint(weapon)
-				tempEvent:AddChoice(rewardEvent, "Continue...", emptyReq, false)]]
-				tempEvent.stuff.weapon = Hyperspace.Blueprints:GetWeaponBlueprint(weapon)
-				weaponEvent.text.data = eventString
-				weaponEvent.text.isLiteral = true
+		if player:HasEquipment(needed) > 0 then
+			local tempEvent = eventManager:CreateEvent("COMBO_CRAFT_STEP", 0, false)
+			tempEvent.stuff.removeItem = needed
+			local neededBlueprint = Hyperspace.Blueprints:GetWeaponBlueprint(needed) or Hyperspace.Blueprints:GetDroneBlueprint(needed) or Hyperspace.Blueprints:GetAugmentBlueprint(needed)
+			currentEvent:AddChoice(tempEvent, "Use your "..neededBlueprint.desc.title:GetText(), emptyReq, false)
+			if itemAmount >= craftingData.component_amounts[itemLevel] then
+				if itemLevel >= #craftingData.components then
+					tempEvent.stuff.weapon = Hyperspace.Blueprints:GetWeaponBlueprint(weapon)
+					tempEvent.text.data = "You follow the supplied blueprint and eventually come away with a new item."
+					tempEvent.text.isLiteral = true
+				else
+					addComponentStep(tempEvent, weapon, craftingData, itemLevel + 1, 1)
+				end
 			else
-				addComponentStep(tempEvent, weapon, craftingData, itemLevel + 1, 1)
+				addComponentStep(tempEvent, weapon, craftingData, itemLevel, itemAmount + 1)
 			end
-		else
-			addComponentStep(tempEvent, weapon, craftingData, itemLevel, itemAmount + 1)
 		end
 	end
 end
@@ -41,14 +64,14 @@ script.on_internal_event(Defines.InternalEvents.PRE_CREATE_CHOICEBOX, function(e
 		local player = Hyperspace.ships.player
 		local eventManager = Hyperspace.Event
 		craftedItemsVisible = {}
-		for weapon, craftingData in pairs(craftedWeapons) do
+		for _, craftingData in ipairs(craftedWeapons) do
+			local weapon = craftingData.weapon
 			local weaponBlueprint = Hyperspace.Blueprints:GetWeaponBlueprint(weapon)
 			local displayOption = false
 			for _, components in ipairs(craftingData.components) do
 				for _, needed in ipairs(components) do
 					if player:HasEquipment(needed) > 0 then
 						displayOption = true
-						break
 					end
 				end
 			end
@@ -82,15 +105,20 @@ script.on_internal_event(Defines.InternalEvents.PRE_CREATE_CHOICEBOX, function(e
 
 				if canCraft then
 					local craftStepEvent = eventManager:CreateEvent("COMBO_CRAFT_STEP", 0, false)
-					weaponEvent:AddChoice(craftStepEvent, "Craft this item.", emptyReq, false)
+					weaponEvent:AddChoice(craftStepEvent, "Craft this item.", blueReq, false)
 
 					addComponentStep(craftStepEvent, weapon, craftingData, 1, 1)
+
+
+					event:AddChoice(weaponEvent, weaponBlueprint.desc.title:GetText(), blueReq, false)
 				else
 					local tempEvent = eventManager:CreateEvent("OPTION_INVALID", 0, false)
 					weaponEvent:AddChoice(tempEvent, "Craft this item.", emptyReq, true)
+
+
+					event:AddChoice(weaponEvent, weaponBlueprint.desc.title:GetText(), emptyReq, false)
 				end
 
-				event:AddChoice(weaponEvent, weaponBlueprint.desc.title:GetText(), emptyReq, false)
 				table.insert(craftedItemsVisible, weapon)
 			end
 		end

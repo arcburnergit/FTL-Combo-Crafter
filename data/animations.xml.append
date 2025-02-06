@@ -1,3 +1,4 @@
+<!--BURST LASERS-->
 <FTL>
 <animSheet name="combo_burst_focus_1_1" w="360" h="58" fw="30" fh="58">weapons_combo/combo_burst_focus_1_1.png</animSheet>
 <weaponAnim name="combo_burst_focus_1_1">
@@ -8,5 +9,90 @@
 	<firePoint x="19" y="26" />
 	<mountPoint x="4" y="43" />
 	<chargeImage>weapons_combo/combo_burst_focus_1_1_glow.png</chargeImage>
+</weaponAnim>
+<animSheet name="combo_burst_focus_2_1" w="396" h="69" fw="33" fh="69">weapons_combo/combo_burst_focus_2_1.png</animSheet>
+<weaponAnim name="combo_burst_focus_2_1">
+	<sheet>combo_burst_focus_2_1</sheet>
+	<desc length="12" x="0" y="0" />
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint x="19" y="29" />
+	<mountPoint x="4" y="43" />
+	<chargeImage>weapons_combo/combo_burst_focus_2_1_glow.png</chargeImage>
+</weaponAnim>
+<animSheet name="combo_burst_focus_3_1" w="396" h="69" fw="33" fh="69">weapons_combo/combo_burst_focus_3_1.png</animSheet>
+<weaponAnim name="combo_burst_focus_3_1">
+	<sheet>combo_burst_focus_3_1</sheet>
+	<desc length="12" x="0" y="0" />
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint x="19" y="29" />
+	<mountPoint x="4" y="43" />
+	<chargeImage>weapons_combo/combo_burst_focus_3_1_glow.png</chargeImage>
+</weaponAnim>
+
+<animSheet name="combo_burst_focus_1_2" w="384" h="71" fw="32" fh="71">weapons_combo/combo_burst_focus_1_2.png</animSheet>
+<weaponAnim name="combo_burst_focus_1_2">
+	<sheet>combo_burst_focus_1_2</sheet>
+	<desc length="12" x="0" y="0" />
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint x="19" y="43" />
+	<mountPoint x="4" y="59" />
+	<chargeImage>weapons_combo/combo_burst_focus_1_2_glow.png</chargeImage>
+</weaponAnim>
+<animSheet name="combo_burst_focus_2_2" w="480" h="80" fw="40" fh="80">weapons_combo/combo_burst_focus_2_2.png</animSheet>
+<weaponAnim name="combo_burst_focus_2_2">
+	<sheet>combo_burst_focus_2_2</sheet>
+	<desc length="12" x="0" y="0" />
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint x="23" y="45" />
+	<mountPoint x="4" y="59" />
+	<chargeImage>weapons_combo/combo_burst_focus_2_2_glow.png</chargeImage>
+</weaponAnim>
+<animSheet name="combo_burst_focus_3_2" w="396" h="82" fw="33" fh="82">weapons_combo/combo_burst_focus_3_2.png</animSheet>
+<weaponAnim name="combo_burst_focus_3_2">
+	<sheet>combo_burst_focus_3_2</sheet>
+	<desc length="12" x="0" y="0" />
+	<chargedFrame>5</chargedFrame>
+	<fireFrame>6</fireFrame>
+	<firePoint x="17" y="48" />
+	<mountPoint x="4" y="62" />
+	<chargeImage>weapons_combo/combo_burst_focus_3_2_glow.png</chargeImage>
+</weaponAnim>
+</FTL>
+
+<!--IONS-->
+<FTL>
+<animSheet name="combo_ion_firestart_1" w="308" h="53" fw="28" fh="53">weapons_combo/combo_ion_firestart_1.png</animSheet>
+<weaponAnim name="combo_ion_firestart_1">
+	<sheet>combo_ion_firestart_1</sheet>
+	<desc length="11" x="0" y="0" />
+	<chargedFrame>4</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint x="14" y="4" />
+	<mountPoint x="3" y="30" />
+	<chargeImage>weapons_combo/combo_ion_firestart_1_glow.png</chargeImage>
+</weaponAnim>
+<animSheet name="combo_ion_firestart_2" w="319" h="53" fw="29" fh="53">weapons_combo/combo_ion_firestart_2.png</animSheet>
+<weaponAnim name="combo_ion_firestart_2">
+	<sheet>combo_ion_firestart_2</sheet>
+	<desc length="11" x="0" y="0" />
+	<chargedFrame>4</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint x="15" y="4" />
+	<mountPoint x="3" y="30" />
+	<chargeImage>weapons_combo/combo_ion_firestart_2_glow.png</chargeImage>
+</weaponAnim>
+<animSheet name="combo_ion_firestart_3" w="330" h="53" fw="30" fh="53">weapons_combo/combo_ion_firestart_3.png</animSheet>
+<weaponAnim name="combo_ion_firestart_3">
+	<sheet>combo_ion_firestart_3</sheet>
+	<desc length="11" x="0" y="0" />
+	<chargedFrame>4</chargedFrame>
+	<fireFrame>5</fireFrame>
+	<firePoint x="15" y="4" />
+	<mountPoint x="3" y="30" />
+	<chargeImage>weapons_combo/combo_ion_firestart_3_glow.png</chargeImage>
 </weaponAnim>
 </FTL>
